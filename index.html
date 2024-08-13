@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(180deg, rgba(194, 194, 194, 1) 0%, rgba(84, 84, 84, 1) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .slider-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            width: 90vw;
+            height: 90vh;
+            overflow: hidden;
+            position: relative;
+            background-color: #fff;
+            box-shadow: 0px 0px 15px 3px #00000085;
+            border-radius: 16px;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            flex: 0 0 20%;
+            box-sizing: border-box;
+            transition: transform 0.5s ease;
+        }
+
+        .slide h2, .slide p {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .slide.hide-text h2,
+        .slide.hide-text p {
+            display: none;
+        }
+
+        .show-text h2, .show-text p {
+            animation: fadeIn .9s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        img {
+            width: 100%;
+            display: block;
+            margin: 5px 0;
+        }
+
+        .small {
+            margin-top: 60px;
+            animation: fadeOn .5s ease forwards;
+        }
+
+        @keyframes fadeOn {
+            from {
+                transform: scale(0.8);
+            }
+            to {
+                transform: scale(0.6);
+            }
+        }
+
+        .medium {
+            margin-top: 60px;
+            animation: fadeOn-2 .5s ease forwards;
+        }
+
+        @keyframes fadeOn-2 {
+            from {
+                transform: scale(0.6);
+            }
+            to {
+                transform: scale(0.8);
+            }
+        }
+
+        .large {
+            animation: fadeOn-3 .5s ease forwards;
+            padding: 0px 5px 13px;
+            margin-top: 40px;
+            border: 4px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 0;
+        }
+        
+        .large::before, .large::after {
+            position: absolute;
+            background: #ffffff;
+            z-index: -1;
+            content: '';
+        }
+        
+        .large::before {
+            height: 110%;
+            width: 70%;
+        }
+        
+        .large::after {
+            margin-bottom: -10px;
+            width: 110%;
+            height: 85%;
+        }
+        
+        @keyframes fadeOn-3 {
+            from {
+                transform: scale(0.85);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        .nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .prev, .next {
+            background-color: rgba(0, 0, 0, 0);
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2,p {
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: -13px;
+        }
+        
+        p {
+            font-size: 10px;
+            margin-top: -20px;
+        }
+
+        @media(max-width: 850px) {
+            .small {
+                margin-top: 50px;
+            }
+
+            .medium {
+                margin-top: 57px;
+            }
+        }
+        
+        @media(max-width: 700px) {
+            .prev, .next {
+                display: none;
+            }
+
+            .small:first-child{
+                margin-left: -1.7vw;
+            }
+
+            .small {
+                margin-top: 50px;
+            }
+
+            .medium {
+                margin-top: 57px;
+            }
+        }
+
+        @media(max-width: 600px) {
+            .small:first-child{
+                margin-left: -3.5vw;
+            }
+
+            .small {
+                margin-top: 60px;
+            }
+
+            .medium {
+                margin-top: 75px;
+            }
+        }
+
+        @media(max-width: 500px) {
+            .small:first-child{
+                margin-left: -5vw;
+            }
+        }
+
+        @media(max-width: 400px) {
+            .small:first-child{
+                margin-left: -9vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="slider-container">
+        <nav class="slider" id="slider">
+        </nav>
+        <nav class="nav">
+            <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+            <button class="next" onclick="plusSlides(1)">&#10095;</button>
+        </nav>
+    </section>
+
+    <script>
+const slidesContent = [
+    { title: 'SERVICES', image: 'https://i.postimg.cc/SQYfZPny/image1.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+    { title: 'SERVICES', image: 'https://i.postimg.cc/bwp0wN3J/image2.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+    { title: 'SERVICES', image: 'https://i.postimg.cc/W18GFLH7/image3.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+    { title: 'SERVICES', image: 'https://i.postimg.cc/KvmTBcgg/image4.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+    { title: 'SERVICES', image: 'https://i.postimg.cc/DZK0h5rb/image5.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+    { title: 'SERVICES', image: 'https://i.postimg.cc/SQYfZPny/image1.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+    { title: 'SERVICES', image: 'https://i.postimg.cc/bwp0wN3J/image2.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+    { title: 'SERVICES', image: 'https://i.postimg.cc/W18GFLH7/image3.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+    { title: 'SERVICES', image: 'https://i.postimg.cc/KvmTBcgg/image4.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+    { title: 'SERVICES', image: 'https://i.postimg.cc/DZK0h5rb/image5.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+];
+
+const slider = document.getElementById('slider');
+const slidesToShow = 5;
+const slideWidth = 100 / slidesToShow;
+let slideIndex = slidesToShow;
+
+function createSlide({ title, image, text }) {
+    const slide = document.createElement('div');
+    slide.classList.add('slide');
+    slide.innerHTML = `
+        <h2>${title}</h2>
+        <img src="${image}" alt="${title}">
+        <p>${text}</p>
+    `;
+    return slide;
+}
+
+slidesContent.forEach(slide => slider.appendChild(createSlide(slide)));
+
+for (let i = slidesContent.length - slidesToShow; i < slidesContent.length; i++) {
+    slider.insertBefore(createSlide(slidesContent[i]), slider.firstChild);
+}
+
+for (let i = 0; i < slidesToShow; i++) {
+    slider.appendChild(createSlide(slidesContent[i]));
+}
+
+slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
+
+function plusSlides(n) {
+    slideIndex += n;
+    showSlides();
+}
+
+function showSlides() {
+    slider.style.transition = 'transform 0.5s ease-in-out';
+    slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
+    
+    if (slideIndex >= slider.children.length - slidesToShow) {
+        setTimeout(() => {
+            slider.style.transition = 'none';
+            slideIndex = slidesToShow;
+            slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
+        }, 500);
+    } else if (slideIndex < slidesToShow) {
+        setTimeout(() => {
+            slider.style.transition = 'none';
+            slideIndex = slider.children.length - slidesToShow - 1;
+            slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
+        }, 500);
+    }
+
+    for (let i = 0; i < slider.children.length; i++) {
+        const slide = slider.children[i];
+        slide.classList.remove('small', 'medium', 'large', 'hide-text', 'show-text');
+        
+        if (i === (slideIndex + 2) % slider.children.length) {
+            slide.classList.add('large');
+            slide.classList.add('show-text');
+        } else if (i === (slideIndex + 1) % slider.children.length || i === (slideIndex + 3) % slider.children.length) {
+            slide.classList.add('medium', 'hide-text');
+        } else if (i === slideIndex || i === (slideIndex + 4) % slider.children.length) {
+            slide.classList.add('small', 'hide-text');
+        } else {
+            slide.classList.add('small', 'hide-text');
+        }
+    }
+}
+
+let startX = 0;
+let isDragging = false;
+let animationFrame;
+
+function dragStart(x) {
+    startX = x;
+    isDragging = true;
+    slider.style.cursor = 'grabbing';
+}
+
+function dragMove(x) {
+    if (!isDragging) return;
+    const walk = (x - startX) * 2;
+    slider.style.transform = `translateX(${(-slideIndex * slideWidth) - (walk / window.innerWidth * 100)}%)`;
+}
+
+function dragEnd(x) {
+    isDragging = false;
+    slider.style.cursor = 'grab';
+    const walk = x - startX;
+    if (walk > 50) {
+        plusSlides(-1);
+    } else if (walk < -50) {
+        plusSlides(1);
+    } else {
+        showSlides();
+    }
+}
+
+slider.addEventListener('mousedown', (e) => dragStart(e.pageX));
+slider.addEventListener('touchstart', (e) => dragStart(e.touches[0].pageX));
+
+slider.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+        cancelAnimationFrame(animationFrame);
+        animationFrame = requestAnimationFrame(() => dragMove(e.pageX));
+    }
+});
+
+slider.addEventListener('touchmove', (e) => {
+    if (isDragging) {
+        cancelAnimationFrame(animationFrame);
+        animationFrame = requestAnimationFrame(() => dragMove(e.touches[0].pageX));
+    }
+});
+
+slider.addEventListener('mouseup', (e) => dragEnd(e.pageX));
+slider.addEventListener('touchend', (e) => dragEnd(e.changedTouches[0].pageX));
+slider.addEventListener('mouseleave', (e) => {
+    if (isDragging) {
+        dragEnd(startX);
+    }
+});
+
+showSlides();
+    </script>
+</body>
+</html>
