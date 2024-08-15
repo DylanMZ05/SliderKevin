@@ -239,114 +239,125 @@
     </section>
 
     <script>
-const slidesContent = [
-    { title: 'SERVICES', image: 'https://i.postimg.cc/SQYfZPny/image1.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
-    { title: 'SERVICES', image: 'https://i.postimg.cc/bwp0wN3J/image2.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
-    { title: 'SERVICES', image: 'https://i.postimg.cc/W18GFLH7/image3.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
-    { title: 'SERVICES', image: 'https://i.postimg.cc/KvmTBcgg/image4.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
-    { title: 'SERVICES', image: 'https://i.postimg.cc/DZK0h5rb/image5.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
-    { title: 'SERVICES', image: 'https://i.postimg.cc/SQYfZPny/image1.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
-    { title: 'SERVICES', image: 'https://i.postimg.cc/bwp0wN3J/image2.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
-    { title: 'SERVICES', image: 'https://i.postimg.cc/W18GFLH7/image3.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
-    { title: 'SERVICES', image: 'https://i.postimg.cc/KvmTBcgg/image4.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
-    { title: 'SERVICES', image: 'https://i.postimg.cc/DZK0h5rb/image5.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
-];
-
-const slider = document.getElementById('slider');
-const slidesToShow = 5;
-const slideWidth = 100 / slidesToShow;
-let slideIndex = slidesToShow;
-
-function createSlide({ title, image, text }) {
-    const slide = document.createElement('div');
-    slide.classList.add('slide');
-    slide.innerHTML = 
-        `<h2>${title}</h2>
-        <img src="${image}" alt="${title}">
-        <p>${text}</p>`;
-    return slide;
-}
-
-slidesContent.forEach(slide => slider.appendChild(createSlide(slide)));
-
-for (let i = slidesContent.length - slidesToShow; i < slidesContent.length; i++) {
-    slider.insertBefore(createSlide(slidesContent[i]), slider.firstChild);
-}
-
-for (let i = 0; i < slidesToShow; i++) {
-    slider.appendChild(createSlide(slidesContent[i]));
-}
-
-slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
-
-function plusSlides(n) {
-    slideIndex += n;
-    showSlides();
-}
-
-function showSlides() {
-    slider.style.transition = 'transform 0.5s ease-in-out';
-    slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
+        const slidesContent = [
+            { title: 'SERVICES', image: 'https://i.postimg.cc/SQYfZPny/image1.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+            { title: 'SERVICES', image: 'https://i.postimg.cc/bwp0wN3J/image2.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+            { title: 'SERVICES', image: 'https://i.postimg.cc/W18GFLH7/image3.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+            { title: 'SERVICES', image: 'https://i.postimg.cc/KvmTBcgg/image4.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+            { title: 'SERVICES', image: 'https://i.postimg.cc/DZK0h5rb/image5.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+            { title: 'SERVICES', image: 'https://i.postimg.cc/SQYfZPny/image1.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+            { title: 'SERVICES', image: 'https://i.postimg.cc/bwp0wN3J/image2.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+            { title: 'SERVICES', image: 'https://i.postimg.cc/W18GFLH7/image3.webp', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+            { title: 'SERVICES', image: 'https://i.postimg.cc/KvmTBcgg/image4.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+            { title: 'SERVICES', image: 'https://i.postimg.cc/DZK0h5rb/image5.jpg', text: 'Create an unforgettable engagement experience! Not only capture stunning photos and videos at a location of your dreams, but we\'ll also treat you like VIPs afterward. A car service will pick you up and take you wherever you\'d like to continue celebrating.' },
+        ];
     
-    if (slideIndex >= slider.children.length - slidesToShow) {
-        setTimeout(() => {
-            slider.style.transition = 'none';
-            slideIndex = slidesToShow;
-            slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
-        }, 500);
-    } else if (slideIndex < slidesToShow) {
-        setTimeout(() => {
-            slider.style.transition = 'none';
-            slideIndex = slider.children.length - slidesToShow - 1;
-            slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
-        }, 500);
-    }
-
-    for (let i = 0; i < slider.children.length; i++) {
-        const slide = slider.children[i];
-        slide.classList.remove('small', 'medium', 'large', 'hide-text', 'show-text');
-        
-        if (i === (slideIndex + 2) % slider.children.length) {
-            slide.classList.add('large');
-            slide.classList.add('show-text');
-        } else if (i === (slideIndex + 1) % slider.children.length || i === (slideIndex + 3) % slider.children.length) {
-            slide.classList.add('medium', 'hide-text');
-        } else if (i === slideIndex || i === (slideIndex + 4) % slider.children.length) {
-            slide.classList.add('small', 'hide-text');
-        } else {
-            slide.classList.add('small', 'hide-text');
+        const slider = document.getElementById('slider');
+        const slidesToShow = 5;
+        const slideWidth = 100 / slidesToShow;
+        let slideIndex = slidesToShow;
+    
+        function createSlide({ title, image, text }) {
+            const slide = document.createElement('div');
+            slide.classList.add('slide');
+            slide.innerHTML = 
+                `<h2>${title}</h2>
+                <img src="${image}" alt="${title}">
+                <p>${text}</p>`;
+            return slide;
         }
-    }
-}
-
-showSlides();
-
-let startX, currentX, distance;
-
-slider.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    distance = 0;
-    slider.style.transition = 'none';
-});
-
-slider.addEventListener('touchmove', (e) => {
-    currentX = e.touches[0].clientX;
-    distance = currentX - startX;
-    // Limitar el desplazamiento para que no sobrepase la imagen siguiente o anterior
-    const maxTranslateX = Math.min(Math.max(-slideIndex * slideWidth + (distance / window.innerWidth) * 100, -((slideIndex + 2) * slideWidth)), -slideIndex * slideWidth);
-    slider.style.transform = 'translateX(' + maxTranslateX + '%)';
-});
-
-slider.addEventListener('touchend', (e) => {
-    const threshold = 50; // Umbral para detectar el deslizamiento
-    if (distance < -threshold) {
-        plusSlides(1);
-    } else if (distance > threshold) {
-        plusSlides(-1);
-    } else {
+    
+        slidesContent.forEach(slide => slider.appendChild(createSlide(slide)));
+    
+        for (let i = slidesContent.length - slidesToShow; i < slidesContent.length; i++) {
+            slider.insertBefore(createSlide(slidesContent[i]), slider.firstChild);
+        }
+    
+        for (let i = 0; i < slidesToShow; i++) {
+            slider.appendChild(createSlide(slidesContent[i]));
+        }
+    
+        slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
+    
+        function plusSlides(n) {
+            slideIndex += n;
+            showSlides();
+        }
+    
+        function showSlides() {
+            slider.style.transition = 'transform 0.5s ease-in-out';
+            slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
+    
+            if (slideIndex >= slider.children.length - slidesToShow) {
+                setTimeout(() => {
+                    slider.style.transition = 'none';
+                    slideIndex = slidesToShow;
+                    slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
+                    setTimeout(() => {
+                        slider.style.transition = 'transform 0.5s ease-in-out';
+                        applySlideClasses();
+                    }, 50);
+                }, 500);
+            } else if (slideIndex < slidesToShow) {
+                setTimeout(() => {
+                    slider.style.transition = 'none';
+                    slideIndex = slider.children.length - slidesToShow - 1;
+                    slider.style.transform = 'translateX(' + (-slideIndex * slideWidth) + '%)';
+                    setTimeout(() => {
+                        slider.style.transition = 'transform 0.5s ease-in-out';
+                        applySlideClasses();
+                    }, 50);
+                }, 500);
+            } else {
+                applySlideClasses();
+            }
+        }
+    
+        function applySlideClasses() {
+            for (let i = 0; i < slider.children.length; i++) {
+                const slide = slider.children[i];
+                slide.classList.remove('small', 'medium', 'large', 'hide-text', 'show-text');
+    
+                if (i === (slideIndex + 2) % slider.children.length) {
+                    slide.classList.add('large');
+                    slide.classList.add('show-text');
+                } else if (i === (slideIndex + 1) % slider.children.length || i === (slideIndex + 3) % slider.children.length) {
+                    slide.classList.add('medium', 'hide-text');
+                } else if (i === slideIndex || i === (slideIndex + 4) % slider.children.length) {
+                    slide.classList.add('small', 'hide-text');
+                } else {
+                    slide.classList.add('small', 'hide-text');
+                }
+            }
+        }
+    
         showSlides();
-    }
-});
+    
+        let startX, currentX, distance;
+    
+        slider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            distance = 0;
+            slider.style.transition = 'none';
+        });
+    
+        slider.addEventListener('touchmove', (e) => {
+            currentX = e.touches[0].clientX;
+            distance = currentX - startX;
+            const maxTranslateX = Math.max(Math.min(-slideIndex * slideWidth + (distance / window.innerWidth) * 100, -((slideIndex - 1.25) * slideWidth)), -((slideIndex + 1.25) * slideWidth));
+            slider.style.transform = 'translateX(' + maxTranslateX + '%)';
+        });
+    
+        slider.addEventListener('touchend', (e) => {
+            const threshold = 50;
+            if (distance < -threshold) {
+                plusSlides(1);
+            } else if (distance > threshold) {
+                plusSlides(-1);
+            } else {
+                showSlides();
+            }
+        });
     </script>
 </body>
 </html>
