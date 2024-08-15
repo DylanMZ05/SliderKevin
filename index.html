@@ -72,34 +72,15 @@
 
         .small {
             margin-top: 60px;
-            animation: fadeOn .5s ease forwards;
-        }
-
-        @keyframes fadeOn {
-            from {
-                transform: scale(0.8);
-            }
-            to {
-                transform: scale(0.6);
-            }
+            scale: 0.6;
         }
 
         .medium {
             margin-top: 60px;
-            animation: fadeOn-2 .5s ease forwards;
-        }
-
-        @keyframes fadeOn-2 {
-            from {
-                transform: scale(0.6);
-            }
-            to {
-                transform: scale(0.8);
-            }
+            scale: 0.80;
         }
 
         .large {
-            animation: fadeOn-3 .5s ease forwards;
             padding: 0px 5px 13px;
             margin-top: 40px;
             border: 4px solid #333;
@@ -126,15 +107,6 @@
             margin-bottom: -10px;
             width: 110%;
             height: 85%;
-        }
-        
-        @keyframes fadeOn-3 {
-            from {
-                transform: scale(0.85);
-            }
-            to {
-                transform: scale(1);
-            }
         }
         
         .nav {
@@ -203,27 +175,63 @@
 
         @media(max-width: 600px) {
             .small:first-child{
-                margin-left: -3.5vw;
+                margin-left: -9vw;
             }
 
             .small {
-                margin-top: 60px;
+                scale: .8;
+                margin-top: 59px;
             }
 
             .medium {
-                margin-top: 75px;
+                scale: 1;
+                margin-top: 78px;
+                margin-right: 15px;
+                margin-left: 15px;
+            }
+
+            .large {
+                scale: 1.2;
             }
         }
 
         @media(max-width: 500px) {
             .small:first-child{
-                margin-left: -5vw;
+                margin-left: -13vw;
+            }
+
+            .small {
+                scale: .9;
+                margin-top: 110px;
+            }
+
+            .medium {
+                scale: 1.2;
+                margin-top: 120px;
+                margin-right: 15px;
+                margin-left: 15px;
+            }
+
+            .large {
+                scale: 1;
             }
         }
 
         @media(max-width: 400px) {
             .small:first-child{
-                margin-left: -9vw;
+                margin-left: -17vw;
+            }
+
+            .small {
+                scale: .9;
+                margin-top: 110px;
+            }
+
+            .medium {
+                scale: 1.4;
+                margin-top: 145px;
+                margin-right: 15px;
+                margin-left: 15px;
             }
         }
     </style>
@@ -344,7 +352,7 @@
         slider.addEventListener('touchmove', (e) => {
             currentX = e.touches[0].clientX;
             distance = currentX - startX;
-            const maxTranslateX = Math.max(Math.min(-slideIndex * slideWidth + (distance / window.innerWidth) * 100, -((slideIndex - 1.25) * slideWidth)), -((slideIndex + 1.25) * slideWidth));
+            const maxTranslateX = Math.max(Math.min(-slideIndex * slideWidth + (distance / window.innerWidth) * 100, -((slideIndex - 1) * slideWidth)), -((slideIndex + 1) * slideWidth));
             slider.style.transform = 'translateX(' + maxTranslateX + '%)';
         });
     
