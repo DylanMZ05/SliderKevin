@@ -260,11 +260,10 @@ let slideIndex = slidesToShow;
 function createSlide({ title, image, text }) {
     const slide = document.createElement('div');
     slide.classList.add('slide');
-    slide.innerHTML = `
-        <h2>${title}</h2>
+    slide.innerHTML = 
+        `<h2>${title}</h2>
         <img src="${image}" alt="${title}">
-        <p>${text}</p>
-    `;
+        <p>${text}</p>`;
     return slide;
 }
 
@@ -320,61 +319,34 @@ function showSlides() {
     }
 }
 
-let startX = 0;
-let isDragging = false;
-let animationFrame;
+showSlides();
 
-function dragStart(x) {
-    startX = x;
-    isDragging = true;
-    slider.style.cursor = 'grabbing';
-}
+let startX, currentX, distance;
 
-function dragMove(x) {
-    if (!isDragging) return;
-    const walk = (x - startX) * 2;
-    slider.style.transform = `translateX(${(-slideIndex * slideWidth) - (walk / window.innerWidth * 100)}%)`;
-}
-
-function dragEnd(x) {
-    isDragging = false;
-    slider.style.cursor = 'grab';
-    const walk = x - startX;
-    if (walk > 50) {
-        plusSlides(-1);
-    } else if (walk < -50) {
-        plusSlides(1);
-    } else {
-        showSlides();
-    }
-}
-
-slider.addEventListener('mousedown', (e) => dragStart(e.pageX));
-slider.addEventListener('touchstart', (e) => dragStart(e.touches[0].pageX));
-
-slider.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-        cancelAnimationFrame(animationFrame);
-        animationFrame = requestAnimationFrame(() => dragMove(e.pageX));
-    }
+slider.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    distance = 0;
+    slider.style.transition = 'none';
 });
 
 slider.addEventListener('touchmove', (e) => {
-    if (isDragging) {
-        cancelAnimationFrame(animationFrame);
-        animationFrame = requestAnimationFrame(() => dragMove(e.touches[0].pageX));
-    }
+    currentX = e.touches[0].clientX;
+    distance = currentX - startX;
+    // Limitar el desplazamiento para que no sobrepase la imagen siguiente o anterior
+    const maxTranslateX = Math.min(Math.max(-slideIndex * slideWidth + (distance / window.innerWidth) * 100, -((slideIndex + 2) * slideWidth)), -slideIndex * slideWidth);
+    slider.style.transform = 'translateX(' + maxTranslateX + '%)';
 });
 
-slider.addEventListener('mouseup', (e) => dragEnd(e.pageX));
-slider.addEventListener('touchend', (e) => dragEnd(e.changedTouches[0].pageX));
-slider.addEventListener('mouseleave', (e) => {
-    if (isDragging) {
-        dragEnd(startX);
+slider.addEventListener('touchend', (e) => {
+    const threshold = 50; // Umbral para detectar el deslizamiento
+    if (distance < -threshold) {
+        plusSlides(1);
+    } else if (distance > threshold) {
+        plusSlides(-1);
+    } else {
+        showSlides();
     }
 });
-
-showSlides();
     </script>
 </body>
 </html>
